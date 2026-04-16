@@ -1,0 +1,8 @@
+# Carpetas compiladas de .NET
+bin/
+obj/
+
+# Archivos de usuario y cache
+*.user
+*.suo
+.vs/
