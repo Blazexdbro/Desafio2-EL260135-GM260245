@@ -34,7 +34,7 @@ class Program
                     break;
                 case 2: // aqui ari se encargara de agregar el ejercicio 2
                     Console.Clear();
-                    Console.WriteLine("en construccion...");
+                    Registronotas.iniciar();
                     Console.ReadLine(); // Pausa para que se logre leer
                     break;
                 case 3:
