@@ -8,17 +8,26 @@ class Registronotas
     static int totalEstudiantes;
 
     // arranca el sistema
-    public static void iniciar()
+    public static void Iniciar()
     {
         Console.WriteLine("╔══════════════════════════════════════╗");
         Console.WriteLine("║     SISTEMA DE REGISTRO DE NOTAS     ║");
         Console.WriteLine("╚══════════════════════════════════════╝");
 
-        // solicitar cantidad de estudiantes
+        // solicitar cantidad de estudiantes, y se fixeo el bug del enter aca tmb
+    do
+    {
         Console.Write("\ncuantos estudiantes desea registrar: ");
-        totalEstudiantes = int.Parse(Console.ReadLine());
+        string entradaCantidad = Console.ReadLine();
+        if (!int.TryParse(entradaCantidad, out totalEstudiantes) || totalEstudiantes <= 0)
+        {
+            Console.WriteLine("por favor digite un numero valido");
+        }   
+    } while (totalEstudiantes <= 0);
 
-        // inicializar vectores con el tamanio ingresado
+    Console.Clear();
+
+        // inicializar vectores con el tamaño ingresado
         nombres = new string[totalEstudiantes];
         notas = new double[totalEstudiantes];
 
@@ -53,9 +62,14 @@ class Registronotas
         do
         {
             Console.Write("nota (0.0 - 10.0): ");
-            nota = double.Parse(Console.ReadLine());
+            string entradaNota = Console.ReadLine();
+            if (!double.TryParse(entradaNota, out nota))
+            {
+                Console.WriteLine("por favor digite un numero valido");
+                nota = -1; // fuerza que el do-while vuelva a pedir
+            }
 
-            if (nota < 0 || nota > 10)
+            else if (nota < 0 || nota > 10)
             {
                 Console.WriteLine("nota invalida, debe estar entre 0 y 10");
             }
@@ -65,7 +79,7 @@ class Registronotas
     }
 
     // calcula y muestra promedio, nota maxima y nota minima
-    static void MostrarEstadisticas()
+    static void MostrarEstadisticas()   
     {
         double suma = 0;
         double max = notas[0];
@@ -141,5 +155,7 @@ class Registronotas
         Console.WriteLine("total aprobados  : " + aprobados);
         Console.WriteLine("total reprobados : " + reprobados);
         Console.WriteLine("promedio general : " + promedio.ToString("F2"));
+        Console.WriteLine("presiona enter para volver...");
+
     }
 }

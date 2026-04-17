@@ -20,10 +20,16 @@ class Program
             Console.WriteLine("1 juego del ahorcado");
             Console.WriteLine("2 registro de notas");
             Console.WriteLine("3 salir");
-            Console.WriteLine("digite una opcion: ");
+            Console.Write("digite una opcion: ");
 
             // leer opcion del usuario
-            opcion = int.Parse(Console.ReadLine());
+            string entrada = Console.ReadLine();
+            if (!int.TryParse(entrada, out opcion))
+            {
+                Console.WriteLine("por favor digite un numero");
+                Console.ReadLine();
+                continue; // fix de el crasheo al presionar enter sin digitar un numero
+            }
 
 
             switch (opcion)
@@ -34,12 +40,16 @@ class Program
                     break;
                 case 2: // aqui ari se encargara de agregar el ejercicio 2
                     Console.Clear();
-                    Registronotas.iniciar();
-                    Console.ReadLine(); // Pausa para que se logre leer
+                    Registronotas.Iniciar();
                     break;
                 case 3:
                     Console.Clear();
                     Console.WriteLine("adios");
+                    break;
+                default:
+                // aca un default tmb
+                    Console.WriteLine("opcion invalida, intente de nuevo");
+                    Console.ReadLine();
                     break;
             }
         }

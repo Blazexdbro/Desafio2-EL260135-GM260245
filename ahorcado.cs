@@ -28,8 +28,13 @@ class Ahorcado
             Console.Write("digite una opcion: ");
 
             // solicitar el numero
-            opcion = int.Parse(Console.ReadLine());
-
+            string entrada = Console.ReadLine();
+            if (!int.TryParse(entrada, out opcion))
+            {
+                Console.WriteLine("por favor digite un numero");
+                Console.ReadLine();
+                continue; // fix de el crasheo al presionar enter sin digitar un numero en el juego de ahorcado
+            }
         
             switch (opcion)
             {
@@ -43,6 +48,11 @@ class Ahorcado
                     Console.ReadLine();
                     break;
                 case 3:
+                    break;
+                default:
+                // un default simple por si se equivocan
+                    Console.WriteLine("opcion invalida, intente de nuevo");
+                    Console.ReadLine();
                     break;
             }
         }
